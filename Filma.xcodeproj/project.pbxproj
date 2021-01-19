@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,10 @@
 		04A1894325B74E4F0090D9F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A1894125B74E4F0090D9F5 /* LaunchScreen.storyboard */; };
 		04A1895425B7589C0090D9F5 /* FilmaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1895325B7589C0090D9F5 /* FilmaManager.swift */; };
 		04A1895B25B75C990090D9F5 /* AlbumTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1895A25B75C990090D9F5 /* AlbumTableVC.swift */; };
+		04A1895F25B75F1E0090D9F5 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1895E25B75F1D0090D9F5 /* Album.swift */; };
+		04A1896725B764400090D9F5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 04A1896625B764400090D9F5 /* Alamofire */; };
+		04A1896B25B767370090D9F5 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 04A1896A25B767370090D9F5 /* SwiftyJSON */; };
+		4B799E24D997748351092A2F /* Pods_Filma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8E58FCA5A7C0C177505FBD /* Pods_Filma.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		04A1894425B74E4F0090D9F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A1895325B7589C0090D9F5 /* FilmaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmaManager.swift; sourceTree = "<group>"; };
 		04A1895A25B75C990090D9F5 /* AlbumTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableVC.swift; sourceTree = "<group>"; };
+		04A1895E25B75F1D0090D9F5 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		5D8E58FCA5A7C0C177505FBD /* Pods_Filma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C32598C68E44D17945CFFA /* Pods-Filma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filma.release.xcconfig"; path = "Target Support Files/Pods-Filma/Pods-Filma.release.xcconfig"; sourceTree = "<group>"; };
+		9DF2002577BC4D771E67BC83 /* Pods-Filma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filma.debug.xcconfig"; path = "Target Support Files/Pods-Filma/Pods-Filma.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +41,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A1896B25B767370090D9F5 /* SwiftyJSON in Frameworks */,
+				4B799E24D997748351092A2F /* Pods_Filma.framework in Frameworks */,
+				04A1896725B764400090D9F5 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +55,8 @@
 			children = (
 				04A1893525B74E4B0090D9F5 /* Filma */,
 				04A1893425B74E4B0090D9F5 /* Products */,
+				EEB7D180A40496166D804D66 /* Pods */,
+				FE599EBC21CA992C2F92FE5D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				04A1895325B7589C0090D9F5 /* FilmaManager.swift */,
+				04A1895E25B75F1D0090D9F5 /* Album.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -94,6 +108,23 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		EEB7D180A40496166D804D66 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9DF2002577BC4D771E67BC83 /* Pods-Filma.debug.xcconfig */,
+				85C32598C68E44D17945CFFA /* Pods-Filma.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FE599EBC21CA992C2F92FE5D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D8E58FCA5A7C0C177505FBD /* Pods_Filma.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -101,15 +132,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04A1894725B74E4F0090D9F5 /* Build configuration list for PBXNativeTarget "Filma" */;
 			buildPhases = (
+				F2CACBAE023DEFE5130CD9EE /* [CP] Check Pods Manifest.lock */,
 				04A1892F25B74E4B0090D9F5 /* Sources */,
 				04A1893025B74E4B0090D9F5 /* Frameworks */,
 				04A1893125B74E4B0090D9F5 /* Resources */,
+				CC5AF22ECF3E204639B9981B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Filma;
+			packageProductDependencies = (
+				04A1896625B764400090D9F5 /* Alamofire */,
+				04A1896A25B767370090D9F5 /* SwiftyJSON */,
+			);
 			productName = Filma;
 			productReference = 04A1893325B74E4B0090D9F5 /* Filma.app */;
 			productType = "com.apple.product-type.application";
@@ -137,6 +174,10 @@
 				Base,
 			);
 			mainGroup = 04A1892A25B74E4B0090D9F5;
+			packageReferences = (
+				04A1896525B764400090D9F5 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				04A1896925B767370090D9F5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 04A1893425B74E4B0090D9F5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -159,6 +200,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CC5AF22ECF3E204639B9981B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Filma/Pods-Filma-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Filma/Pods-Filma-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Filma/Pods-Filma-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2CACBAE023DEFE5130CD9EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Filma-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		04A1892F25B74E4B0090D9F5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -168,6 +251,7 @@
 				04A1895B25B75C990090D9F5 /* AlbumTableVC.swift in Sources */,
 				04A1895425B7589C0090D9F5 /* FilmaManager.swift in Sources */,
 				04A1893925B74E4B0090D9F5 /* SceneDelegate.swift in Sources */,
+				04A1895F25B75F1E0090D9F5 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +395,7 @@
 		};
 		04A1894825B74E4F0090D9F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DF2002577BC4D771E67BC83 /* Pods-Filma.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -330,6 +415,7 @@
 		};
 		04A1894925B74E4F0090D9F5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85C32598C68E44D17945CFFA /* Pods-Filma.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -369,6 +455,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		04A1896525B764400090D9F5 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+		04A1896925B767370090D9F5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		04A1896625B764400090D9F5 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04A1896525B764400090D9F5 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		04A1896A25B767370090D9F5 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04A1896925B767370090D9F5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 04A1892B25B74E4B0090D9F5 /* Project object */;
 }

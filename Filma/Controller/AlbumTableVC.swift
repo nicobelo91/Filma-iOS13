@@ -9,12 +9,12 @@ import UIKit
 
 class AlbumTableVC: UITableViewController {
 
-    let albums = [Album]()
+    let albums = ["Hi", "Goodmorning"]
     let filmaManager = FilmaManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        filmaManager.fetchAlbums()
     }
 
     // MARK: - Table view data source
@@ -29,7 +29,7 @@ class AlbumTableVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath)
         
         let album = albums[indexPath.row]
-        cell.textLabel?.text = album.name
+        cell.textLabel?.text = album
         
         return cell
     }
