@@ -12,21 +12,16 @@ import SwiftyJSON
 class AlbumTableVC: UITableViewController {
 
     var albums = [Album]()
-    let filmaManager = FilmaManager()
+    //let filmaManager = FilmaManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //filmaManager.fetchAlbums()
         fetchAlbums()
     }
-
-    // MARK: - Table view data source
-
-
-    let urlString = "https://jsonplaceholder.typicode.com"
     
     func fetchAlbums() {
-        AF.request("\(urlString)/albums").responseJSON { (response) in
+        AF.request("https://jsonplaceholder.typicode.com/albums").responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -45,6 +40,9 @@ class AlbumTableVC: UITableViewController {
             }
         }
     }
+    
+    // MARK: - Tableview Data Source
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return albums.count
@@ -57,6 +55,21 @@ class AlbumTableVC: UITableViewController {
         cell.textLabel?.text = album.title
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToPhoto", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! PhotoCollectionVC
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedAlbum = albums[indexPath.row]
+        }
     }
 
 }

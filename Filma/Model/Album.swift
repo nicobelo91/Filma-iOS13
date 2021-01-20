@@ -11,10 +11,14 @@ struct Album {
     var id: Int?
     var userId: Int?
     var title: String?
+    let photos = [Photo]()
     
-//    init(_ id: Int?, _ userId: Int?, _ title: String?) {
-//        self.id = id
-//        self.userId = userId
-//        self.title = title
-//    }
+}
+
+struct Photo {
+    var albumId: Int?
+    var id: Int?
+    var title: String?
+    var url: String?
+    var thumbnailUrl: String?
 }

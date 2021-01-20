@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,10 +32,86 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Filma" id="cah-Er-ohH"/>
+                    <connections>
+                        <segue destination="W1c-tz-x4Z" kind="show" identifier="goToPhoto" id="a8v-iU-C7n"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dW2-5L-ksm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1491.304347826087" y="70.982142857142847"/>
+        </scene>
+        <!--Photo CollectionVC-->
+        <scene sceneID="vq4-g4-xV9">
+            <objects>
+                <collectionViewController id="W1c-tz-x4Z" customClass="PhotoCollectionVC" customModule="Filma" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Gz6-c7-YnI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="L5d-Rr-Vgl">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="qb5-Y3-57K" customClass="PhotoCell" customModule="Filma">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="R47-Yz-WwP">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Evy-lv-weT">
+                                            <rect key="frame" x="10" y="10" width="130" height="160"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KgR-8e-sSq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="130" id="9Rz-m7-5Tw"/>
+                                                        <constraint firstAttribute="width" constant="130" id="fbB-rM-GhR"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLh-2d-Amb">
+                                                    <rect key="frame" x="0.0" y="130" width="130" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KgR-8e-sSq" firstAttribute="leading" secondItem="Evy-lv-weT" secondAttribute="leading" id="9PT-Gh-0rO"/>
+                                                <constraint firstItem="KgR-8e-sSq" firstAttribute="top" secondItem="Evy-lv-weT" secondAttribute="top" id="mGz-Os-TYy"/>
+                                                <constraint firstAttribute="trailing" secondItem="KgR-8e-sSq" secondAttribute="trailing" id="ogm-am-Cmc"/>
+                                                <constraint firstItem="oLh-2d-Amb" firstAttribute="leading" secondItem="Evy-lv-weT" secondAttribute="leading" id="u3T-QE-r2V"/>
+                                                <constraint firstAttribute="trailing" secondItem="oLh-2d-Amb" secondAttribute="trailing" id="u7p-by-44a"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Evy-lv-weT" firstAttribute="top" secondItem="R47-Yz-WwP" secondAttribute="top" constant="10" id="4Qv-jo-sj9"/>
+                                        <constraint firstAttribute="bottom" secondItem="Evy-lv-weT" secondAttribute="bottom" constant="10" id="ZIS-P1-Kq5"/>
+                                        <constraint firstItem="Evy-lv-weT" firstAttribute="leading" secondItem="R47-Yz-WwP" secondAttribute="leading" constant="10" id="byh-jS-XG7"/>
+                                        <constraint firstAttribute="trailing" secondItem="Evy-lv-weT" secondAttribute="trailing" constant="10" id="gmj-uZ-2Kp"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="150" height="180"/>
+                                <connections>
+                                    <outlet property="image" destination="KgR-8e-sSq" id="tkS-19-5pO"/>
+                                    <outlet property="title" destination="oLh-2d-Amb" id="7iT-TG-8o1"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="W1c-tz-x4Z" id="1Fa-hX-Sdg"/>
+                            <outlet property="delegate" destination="W1c-tz-x4Z" id="WZW-8S-QjC"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="r53-3m-QDG"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TUE-KG-LZk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2518.840579710145" y="70.982142857142847"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EBp-hE-Ixa">
