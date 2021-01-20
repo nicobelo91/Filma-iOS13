@@ -12,7 +12,9 @@ import SwiftyJSON
 class AlbumTableVC: UITableViewController {
 
     var albums = [Album]()
-    //let filmaManager = FilmaManager()
+    var searchedAlbums = [Album]()
+    var searching = false
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,14 +46,23 @@ class AlbumTableVC: UITableViewController {
     // MARK: - Tableview Data Source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return albums.count
+        if searching {
+            return searchedAlbums.count
+        } else {
+            return albums.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath)
         
-        let album = albums[indexPath.row]
+        var album: Album {
+            if searching {
+                return searchedAlbums[indexPath.row]
+            } else {
+                return albums[indexPath.row]
+            }
+        }
         cell.textLabel?.text = album.title
         
         return cell
@@ -72,4 +83,19 @@ class AlbumTableVC: UITableViewController {
         }
     }
 
+}
+
+extension AlbumTableVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedAlbums = albums.filter({$0.title!.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        searching = true
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        tableView.reloadData()
+    }
 }
