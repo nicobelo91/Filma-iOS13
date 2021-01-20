@@ -73,10 +73,25 @@ class PhotoCollectionVC: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCell
     
         let photo = photos[indexPath.item]
-        cell.image.image = filmaManager.urlToImg(photo.url ?? "")
+        cell.image.image = filmaManager.urlToImg(photo.thumbnailUrl ?? "")
         cell.title.text = photo.title
     
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToDetail", sender: self)
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
 
+    // MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! PhotoDetailVC
+        
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            let photo = photos[indexPath.item]
+            destinationVC.selectedPhoto = photo
+        }
+    }
 }
