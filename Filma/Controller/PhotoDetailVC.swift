@@ -28,4 +28,13 @@ class PhotoDetailVC: UIViewController {
         
     }
 
+    @IBAction func shareButtonPressed(_ sender: UIBarButtonItem) {
+        guard let image = photoImage.image?.jpegData(compressionQuality: 0.8) else {
+                print("No image found")
+                return
+            }
+            let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+            vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+            present(vc, animated: true)
+    }
 }

@@ -14,12 +14,22 @@ class AlbumTableVC: UITableViewController {
     var albums = [Album]()
     var searchedAlbums = [Album]()
     var searching = false
-    @IBOutlet weak var searchBar: UISearchBar!
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //filmaManager.fetchAlbums()
+        configureSearchController()
         fetchAlbums()
+    }
+    
+    func configureSearchController() {
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Albums"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+        searchController.searchBar.delegate = self
+        
     }
     
     func fetchAlbums() {

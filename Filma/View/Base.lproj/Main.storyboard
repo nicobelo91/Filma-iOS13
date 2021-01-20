@@ -17,18 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="rwT-RY-h7R">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.30502680859999998" green="0.7584265348" blue="0.80363657990000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="yep-NM-6Fd" id="9VY-eD-aQI"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AlbumCell" id="2en-iK-7rY">
-                                <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2en-iK-7rY" id="Hz7-dF-9fO">
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
@@ -43,7 +34,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Filma" id="cah-Er-ohH"/>
                     <connections>
-                        <outlet property="searchBar" destination="rwT-RY-h7R" id="BmE-7m-3oW"/>
                         <segue destination="W1c-tz-x4Z" kind="show" identifier="goToPhoto" id="a8v-iU-C7n"/>
                     </connections>
                 </tableViewController>
@@ -195,7 +185,13 @@
                             <constraint firstItem="1ak-ft-Ba1" firstAttribute="trailing" secondItem="um5-zU-oOF" secondAttribute="trailing" constant="20" id="ptV-dz-CS8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="3FI-9q-vKF"/>
+                    <navigationItem key="navigationItem" id="3FI-9q-vKF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="RWD-WV-Gn3">
+                            <connections>
+                                <action selector="shareButtonPressed:" destination="7hT-Up-fnM" id="Dvl-fY-qah"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="photoAlbumId" destination="XMy-Ag-7te" id="jSL-OU-38E"/>
                         <outlet property="photoId" destination="qpF-Z1-PhS" id="1LB-lv-VXs"/>
