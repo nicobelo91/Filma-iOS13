@@ -14,25 +14,34 @@ private let reuseIdentifier = "PhotoCell"
 class PhotoCollectionVC: UICollectionViewController {
     var selectedAlbum: Album?
     var photos = [Photo]()
-//    var filteredPhotos: [Photo] {
-//        for photo in photos {
-//            if selectedAlbum?.id == photo.albumId {
-//                photos.append(photo)
-//            }
-//        }
-//        return photos
-//    }
+    var searchedPhotos = [Photo]()
+    var searching = false
     let filmaManager = FilmaManager()
-    let columnLayout = ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+    var columnLayout: ColumnFlowLayout?
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchPhotos()
-        collectionView.collectionViewLayout = columnLayout
+        configureSearchController()
+        collectionView.collectionViewLayout = columnLayout ?? ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //photos = selectedAlbum!.photos
+    }
+    
+    func configureSearchController() {
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Photos"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+        searchController.searchBar.scopeButtonTitles = ["1 Column", "2 Columns", "3 Columns"]
+        searchController.searchBar.selectedScopeButtonIndex = 2
+        searchController.searchBar.delegate = self
+        
     }
     
     func fetchPhotos() {
@@ -65,14 +74,23 @@ class PhotoCollectionVC: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return photos.count
+        if searching {
+            return searchedPhotos.count
+        } else {
+            return photos.count
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCell
     
-        let photo = photos[indexPath.item]
+        var photo: Photo {
+            if searching {
+                return searchedPhotos[indexPath.item]
+            } else {
+                return photos[indexPath.item]
+            }
+        }
         cell.image.image = filmaManager.urlToImg(photo.thumbnailUrl ?? "")
         cell.title.text = photo.title
     
@@ -93,5 +111,33 @@ class PhotoCollectionVC: UICollectionViewController {
             let photo = photos[indexPath.item]
             destinationVC.selectedPhoto = photo
         }
+    }
+}
+
+extension PhotoCollectionVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedPhotos = photos.filter({$0.title!.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        searching = true
+        
+        collectionView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+
+            switch selectedScope {
+            case 0:
+                columnLayout = ColumnFlowLayout(cellsPerRow: 1, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+            case 1:
+                columnLayout = ColumnFlowLayout(cellsPerRow: 2, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+            default:
+                columnLayout = ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+            }
+        collectionView.collectionViewLayout = columnLayout!
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        collectionView.reloadData()
     }
 }

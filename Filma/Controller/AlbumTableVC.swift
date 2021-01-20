@@ -79,10 +79,13 @@ class AlbumTableVC: UITableViewController {
         let destinationVC = segue.destination as! PhotoCollectionVC
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedAlbum = albums[indexPath.row]
+            if searching {
+                destinationVC.selectedAlbum = searchedAlbums[indexPath.row]
+            } else {
+                destinationVC.selectedAlbum = albums[indexPath.row]
+            }
         }
     }
-
 }
 
 extension AlbumTableVC: UISearchBarDelegate {

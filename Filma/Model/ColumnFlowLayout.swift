@@ -30,7 +30,14 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return }
         let marginsAndInsets = sectionInset.left + sectionInset.right + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
         let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
-        itemSize = CGSize(width: itemWidth, height: itemWidth * 1.6)
+        switch cellsPerRow {
+        case 1:
+            itemSize = CGSize(width: itemWidth, height: itemWidth * 0.5)
+        case 2:
+            itemSize = CGSize(width: itemWidth, height: itemWidth * 1.0)
+        default:
+            itemSize = CGSize(width: itemWidth, height: itemWidth * 1.6)
+        }
     }
 
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
