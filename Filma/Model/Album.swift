@@ -7,8 +7,14 @@
 
 import Foundation
 
-struct Album: Decodable, Identifiable {
-    var id: Int
-    var userId: Int
-    var title: String
+struct Album {
+    var id: Int?
+    var userId: Int?
+    var title: String?
+    
+//    init(_ id: Int?, _ userId: Int?, _ title: String?) {
+//        self.id = id
+//        self.userId = userId
+//        self.title = title
+//    }
 }
