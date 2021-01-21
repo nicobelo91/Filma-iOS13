@@ -25,7 +25,8 @@ class PhotoCollectionVC: UICollectionViewController {
         super.viewDidLoad()
         fetchPhotos()
         configureSearchController()
-        collectionView.collectionViewLayout = columnLayout ?? ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+        collectionView.collectionViewLayout = columnLayout ?? ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
+        //collectionView.backgroundColor = HexColor(selectedAlbum!.color)
 
     }
     
@@ -81,6 +82,9 @@ class PhotoCollectionVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCell
     
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 1
+        
         var photo: Photo {
             if searching {
                 return searchedPhotos[indexPath.item]
@@ -90,6 +94,14 @@ class PhotoCollectionVC: UICollectionViewController {
         }
         cell.image.image = filmaManager.urlToImg(photo.thumbnailUrl ?? "")
         cell.title.text = photo.title
+        
+//        if let color = HexColor(selectedAlbum!.color)?.darken(byPercentage: CGFloat(indexPath.item) / CGFloat(photos.count)) {
+//            cell.backgroundColor = color
+//
+//            cell.title.textColor = ContrastColorOf(color, returnFlat: true)
+//            cell.layer.borderColor = ContrastColorOf(color, returnFlat: true).cgColor
+//            cell.layer.borderWidth = 1
+//        }
     
         return cell
     }
@@ -123,11 +135,11 @@ extension PhotoCollectionVC: UISearchBarDelegate {
 
             switch selectedScope {
             case 0:
-                columnLayout = ColumnFlowLayout(cellsPerRow: 1, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+                columnLayout = ColumnFlowLayout(cellsPerRow: 1, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
             case 1:
-                columnLayout = ColumnFlowLayout(cellsPerRow: 2, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+                columnLayout = ColumnFlowLayout(cellsPerRow: 2, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
             default:
-                columnLayout = ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
+                columnLayout = ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
             }
         collectionView.collectionViewLayout = columnLayout!
     }

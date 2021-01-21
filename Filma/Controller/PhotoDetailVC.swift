@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class PhotoDetailVC: UIViewController {
 
@@ -25,6 +26,14 @@ class PhotoDetailVC: UIViewController {
         photoTitle.text = selectedPhoto.title
         photoId.text = "Photo ID: \(selectedPhoto.id ?? 0)"
         photoAlbumId.text = "Album ID: \(selectedPhoto.albumId ?? 0)"
+        
+//        if let color = HexColor(selectedPhoto.color!) {
+//            view.backgroundColor = color
+//            photoTitle.textColor = ContrastColorOf(color, returnFlat: true)
+//            photoId.textColor = ContrastColorOf(color, returnFlat: true)
+//            photoAlbumId.textColor = ContrastColorOf(color, returnFlat: true)
+//        
+//        }
         
     }
 

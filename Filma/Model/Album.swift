@@ -13,7 +13,6 @@ struct Album {
     var userId: Int?
     var title: String?
     let photos = [Photo]()
-    var color: String = UIColor.randomFlat().hexValue()
     
 }
 

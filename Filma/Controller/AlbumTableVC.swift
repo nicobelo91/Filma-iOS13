@@ -74,10 +74,12 @@ class AlbumTableVC: UITableViewController {
                 return albums[indexPath.row]
             }
         }
-        
+        //
         cell.textLabel?.text = album.title
-        cell.backgroundColor = UIColor(hexString: album.color)
-        cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor ?? .white, returnFlat: true)
+        if let color = HexColor("#C6EAF5")?.darken(byPercentage: CGFloat(indexPath.row) / 600) {
+            cell.backgroundColor = color
+            cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+        }
         
         return cell
     }
