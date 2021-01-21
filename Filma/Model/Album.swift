@@ -5,13 +5,15 @@
 //  Created by Nico Cobelo on 19/01/2021.
 //
 
-import Foundation
+import UIKit
+import ChameleonFramework
 
 struct Album {
     var id: Int?
     var userId: Int?
     var title: String?
     let photos = [Photo]()
+    var color: String = UIColor.randomFlat().hexValue()
     
 }
 
@@ -21,4 +23,5 @@ struct Photo {
     var title: String?
     var url: String?
     var thumbnailUrl: String?
+    var color: String?
 }

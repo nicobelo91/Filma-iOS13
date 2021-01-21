@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import ChameleonFramework
 
 private let reuseIdentifier = "PhotoCell"
 
@@ -26,10 +27,6 @@ class PhotoCollectionVC: UICollectionViewController {
         configureSearchController()
         collectionView.collectionViewLayout = columnLayout ?? ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 10, minimumLineSpacing: 10)
 
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //photos = selectedAlbum!.photos
     }
     
     func configureSearchController() {

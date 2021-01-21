@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import ChameleonFramework
 
 class AlbumTableVC: UITableViewController {
 
@@ -73,7 +74,10 @@ class AlbumTableVC: UITableViewController {
                 return albums[indexPath.row]
             }
         }
+        
         cell.textLabel?.text = album.title
+        cell.backgroundColor = UIColor(hexString: album.color)
+        cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor ?? .white, returnFlat: true)
         
         return cell
     }
