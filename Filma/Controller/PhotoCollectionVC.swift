@@ -23,11 +23,10 @@ class PhotoCollectionVC: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchPhotos()
+        filmaManager.fetchPhotos()
+        filmaManager.delegate = self
         configureSearchController()
         collectionView.collectionViewLayout = columnLayout ?? ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
-        //collectionView.backgroundColor = HexColor(selectedAlbum!.color)
-
     }
     
     func configureSearchController() {
@@ -41,35 +40,8 @@ class PhotoCollectionVC: UICollectionViewController {
         searchController.searchBar.delegate = self
         
     }
-    
-    func fetchPhotos() {
-        AF.request("https://jsonplaceholder.typicode.com/photos").responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                
-                for value in json.arrayValue {
-                    let albbumId = value.dictionaryValue["albumId"]!.int
-                    let id = value.dictionaryValue["id"]!.int
-                    let title = value.dictionaryValue["title"]!.string
-                    let url = value.dictionaryValue["url"]!.string
-                    let thumbnailUrl = value.dictionaryValue["thumbnailUrl"]!.string
-                    
-                    let photo = Photo(albumId: albbumId, id: id, title: title, url: url, thumbnailUrl: thumbnailUrl)
-                    if photo.albumId == self.selectedAlbum?.id {
-                        self.photos.append(photo)
-                    }
-                }
-                self.collectionView.reloadData()
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 
     // MARK: UICollectionViewDataSource
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
@@ -94,14 +66,6 @@ class PhotoCollectionVC: UICollectionViewController {
         }
         cell.image.image = filmaManager.urlToImg(photo.thumbnailUrl ?? "")
         cell.title.text = photo.title
-        
-//        if let color = HexColor(selectedAlbum!.color)?.darken(byPercentage: CGFloat(indexPath.item) / CGFloat(photos.count)) {
-//            cell.backgroundColor = color
-//
-//            cell.title.textColor = ContrastColorOf(color, returnFlat: true)
-//            cell.layer.borderColor = ContrastColorOf(color, returnFlat: true).cgColor
-//            cell.layer.borderWidth = 1
-//        }
     
         return cell
     }
@@ -122,6 +86,7 @@ class PhotoCollectionVC: UICollectionViewController {
         }
     }
 }
+// MARK: - SearchBar Delegate
 
 extension PhotoCollectionVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -148,5 +113,19 @@ extension PhotoCollectionVC: UISearchBarDelegate {
         searching = false
         searchBar.text = ""
         collectionView.reloadData()
+    }
+}
+
+// MARK: - FilmaManager Delegate
+
+extension PhotoCollectionVC: FilmaManagerDelegate {
+    func didAppendPhoto(_ filmaManager: FilmaManager, _ photo: Photo) {
+        if photo.albumId == self.selectedAlbum?.id {
+            self.photos.append(photo)
+        }
+    }
+    
+    func didUpdateData(_ filmaManager: FilmaManager) {
+        self.collectionView.reloadData()
     }
 }

@@ -14,13 +14,15 @@ class AlbumTableVC: UITableViewController {
 
     var albums = [Album]()
     var searchedAlbums = [Album]()
+    var filmaManager = FilmaManager()
     var searching = false
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSearchController()
-        fetchAlbums()
+        filmaManager.delegate = self
+        filmaManager.fetchAlbums()
     }
     
     func configureSearchController() {
@@ -31,27 +33,6 @@ class AlbumTableVC: UITableViewController {
         definesPresentationContext = true
         searchController.searchBar.delegate = self
         
-    }
-    
-    func fetchAlbums() {
-        AF.request("https://jsonplaceholder.typicode.com/albums").responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                
-                for value in json.arrayValue {
-                    let id = value.dictionaryValue["id"]!.int
-                    let userId = value.dictionaryValue["userId"]!.int
-                    let title = value.dictionaryValue["title"]!.string
-                    
-                    let album = Album(id: id, userId: userId, title: title)
-                    self.albums.append(album)
-                }
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
     
     // MARK: - Tableview Data Source
@@ -104,6 +85,7 @@ class AlbumTableVC: UITableViewController {
     }
 }
 
+// MARK: - SearchBar Delegate
 extension AlbumTableVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -115,6 +97,17 @@ extension AlbumTableVC: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searching = false
         searchBar.text = ""
+        tableView.reloadData()
+    }
+}
+
+// MARK: - FilmaManager Delegate
+extension AlbumTableVC: FilmaManagerDelegate {
+    func didAppendAlbum(_ filmaManager: FilmaManager, _ album: Album) {
+        self.albums.append(album)
+    }
+    
+    func didUpdateData(_ filmaManager: FilmaManager) {
         tableView.reloadData()
     }
 }
