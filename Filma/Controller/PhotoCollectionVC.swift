@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import ChameleonFramework
+import SDWebImage
 
 private let reuseIdentifier = "PhotoCell"
 
@@ -17,8 +18,9 @@ class PhotoCollectionVC: UICollectionViewController {
     var photos = [Photo]()
     var searchedPhotos = [Photo]()
     var searching = false
+    
     let filmaManager = FilmaManager()
-    var columnLayout: ColumnFlowLayout?
+    var searchBarManager = SearchBarManager()
     let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
@@ -26,19 +28,7 @@ class PhotoCollectionVC: UICollectionViewController {
         filmaManager.fetchPhotos()
         filmaManager.delegate = self
         configureSearchController()
-        collectionView.collectionViewLayout = columnLayout ?? ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
-    }
-    
-    func configureSearchController() {
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Photos"
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
-        searchController.searchBar.scopeButtonTitles = ["1 Column", "2 Columns", "3 Columns"]
-        searchController.searchBar.selectedScopeButtonIndex = 2
-        searchController.searchBar.delegate = self
-        
+        collectionView.collectionViewLayout = searchBarManager.changeNumOfColumns(3)
     }
 
     // MARK: UICollectionViewDataSource
@@ -64,7 +54,7 @@ class PhotoCollectionVC: UICollectionViewController {
                 return photos[indexPath.item]
             }
         }
-        cell.image.image = filmaManager.urlToImg(photo.thumbnailUrl ?? "")
+        cell.image.sd_setImage(with: URL(string: photo.thumbnailUrl ?? ""))
         cell.title.text = photo.title
     
         return cell
@@ -86,6 +76,7 @@ class PhotoCollectionVC: UICollectionViewController {
         }
     }
 }
+
 // MARK: - SearchBar Delegate
 
 extension PhotoCollectionVC: UISearchBarDelegate {
@@ -98,15 +89,21 @@ extension PhotoCollectionVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
 
-            switch selectedScope {
-            case 0:
-                columnLayout = ColumnFlowLayout(cellsPerRow: 1, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
-            case 1:
-                columnLayout = ColumnFlowLayout(cellsPerRow: 2, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
-            default:
-                columnLayout = ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
-            }
-        collectionView.collectionViewLayout = columnLayout!
+        let columnLayout = searchBarManager.changeNumOfColumns(selectedScope)
+        collectionView.collectionViewLayout = columnLayout
+    }
+    
+    
+    func configureSearchController() {
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Photos"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+        searchController.searchBar.scopeButtonTitles = ["1 Column", "2 Columns", "3 Columns"]
+        searchController.searchBar.selectedScopeButtonIndex = 2
+        searchController.searchBar.delegate = self
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

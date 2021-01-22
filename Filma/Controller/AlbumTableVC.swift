@@ -25,16 +25,6 @@ class AlbumTableVC: UITableViewController {
         filmaManager.fetchAlbums()
     }
     
-    func configureSearchController() {
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Albums"
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
-        searchController.searchBar.delegate = self
-        
-    }
-    
     // MARK: - Tableview Data Source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,6 +88,16 @@ extension AlbumTableVC: UISearchBarDelegate {
         searching = false
         searchBar.text = ""
         tableView.reloadData()
+    }
+    
+    func configureSearchController() {
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Albums"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+        searchController.searchBar.delegate = self
+        
     }
 }
 

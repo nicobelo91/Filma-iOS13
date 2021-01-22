@@ -74,20 +74,6 @@ class FilmaManager {
             }
         }
     }
-    
-    func urlToImg(_ url: String) -> UIImage? {
-        if url != "N/A" {
-            let posterUrlString = url
-            let posterUrl = URL(string: posterUrlString)!
-            let posterData = try! Data(contentsOf: posterUrl)
-            guard let posterImg = UIImage(data: posterData) else {
-                fatalError("Couldn't convert string to image")
-            }
-            return posterImg
-        } else {
-            return UIImage(named: "noImage.jpg")
-        }
-    }
 }
 
 extension FilmaManagerDelegate {

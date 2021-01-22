@@ -22,7 +22,7 @@ class PhotoDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        photoImage.image = filmaManager.urlToImg(selectedPhoto.url!)
+        photoImage.sd_setImage(with: URL(string: selectedPhoto.url!))
         photoTitle.text = selectedPhoto.title
         photoId.text = "Photo ID: \(selectedPhoto.id ?? 0)"
         photoAlbumId.text = "Album ID: \(selectedPhoto.albumId ?? 0)"

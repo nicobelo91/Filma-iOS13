@@ -22,6 +22,9 @@
 		04A1895F25B75F1E0090D9F5 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1895E25B75F1D0090D9F5 /* Album.swift */; };
 		04A1896725B764400090D9F5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 04A1896625B764400090D9F5 /* Alamofire */; };
 		04A1896B25B767370090D9F5 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 04A1896A25B767370090D9F5 /* SwiftyJSON */; };
+		04D07EA625BAE8B8001C52A4 /* SearchBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D07EA525BAE8B8001C52A4 /* SearchBarManager.swift */; };
+		04D07EAA25BAEF1B001C52A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 04D07EA925BAEF1B001C52A4 /* SDWebImage */; };
+		04D07EAC25BAEF1B001C52A4 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04D07EAB25BAEF1B001C52A4 /* SDWebImageMapKit */; };
 		4B799E24D997748351092A2F /* Pods_Filma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8E58FCA5A7C0C177505FBD /* Pods_Filma.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +44,7 @@
 		04A1895325B7589C0090D9F5 /* FilmaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmaManager.swift; sourceTree = "<group>"; };
 		04A1895A25B75C990090D9F5 /* AlbumTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableVC.swift; sourceTree = "<group>"; };
 		04A1895E25B75F1D0090D9F5 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		04D07EA525BAE8B8001C52A4 /* SearchBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarManager.swift; sourceTree = "<group>"; };
 		5D8E58FCA5A7C0C177505FBD /* Pods_Filma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Filma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C32598C68E44D17945CFFA /* Pods-Filma.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filma.release.xcconfig"; path = "Target Support Files/Pods-Filma/Pods-Filma.release.xcconfig"; sourceTree = "<group>"; };
 		9DF2002577BC4D771E67BC83 /* Pods-Filma.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filma.debug.xcconfig"; path = "Target Support Files/Pods-Filma/Pods-Filma.debug.xcconfig"; sourceTree = "<group>"; };
@@ -52,7 +56,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A1896B25B767370090D9F5 /* SwiftyJSON in Frameworks */,
+				04D07EAC25BAEF1B001C52A4 /* SDWebImageMapKit in Frameworks */,
 				4B799E24D997748351092A2F /* Pods_Filma.framework in Frameworks */,
+				04D07EAA25BAEF1B001C52A4 /* SDWebImage in Frameworks */,
 				04A1896725B764400090D9F5 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +105,7 @@
 				04A1895325B7589C0090D9F5 /* FilmaManager.swift */,
 				04A1895E25B75F1D0090D9F5 /* Album.swift */,
 				0481E66025B87DEC00C2DECD /* ColumnFlowLayout.swift */,
+				04D07EA525BAE8B8001C52A4 /* SearchBarManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -161,6 +168,8 @@
 			packageProductDependencies = (
 				04A1896625B764400090D9F5 /* Alamofire */,
 				04A1896A25B767370090D9F5 /* SwiftyJSON */,
+				04D07EA925BAEF1B001C52A4 /* SDWebImage */,
+				04D07EAB25BAEF1B001C52A4 /* SDWebImageMapKit */,
 			);
 			productName = Filma;
 			productReference = 04A1893325B74E4B0090D9F5 /* Filma.app */;
@@ -192,6 +201,7 @@
 			packageReferences = (
 				04A1896525B764400090D9F5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				04A1896925B767370090D9F5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				04D07EA825BAEF1B001C52A4 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 04A1893425B74E4B0090D9F5 /* Products */;
 			projectDirPath = "";
@@ -272,6 +282,7 @@
 				0481E66125B87DEC00C2DECD /* ColumnFlowLayout.swift in Sources */,
 				04A1893925B74E4B0090D9F5 /* SceneDelegate.swift in Sources */,
 				04A1895F25B75F1E0090D9F5 /* Album.swift in Sources */,
+				04D07EA625BAE8B8001C52A4 /* SearchBarManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +504,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		04D07EA825BAEF1B001C52A4 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -505,6 +524,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04A1896925B767370090D9F5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		04D07EA925BAEF1B001C52A4 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04D07EA825BAEF1B001C52A4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		04D07EAB25BAEF1B001C52A4 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04D07EA825BAEF1B001C52A4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
