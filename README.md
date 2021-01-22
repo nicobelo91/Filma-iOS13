@@ -35,9 +35,13 @@ This app was created as part of <a href="https://www.mediamonks.com/">MediaMonks
 
 ## Screenshots
 
-<img alt="Filma" title="Filma" src="Documentation/screenshots/tablevc.png" width="200">
-<img alt="Filma" title="Filma" src="Documentation/screenshots/collectionvc.png" width="200">
-<img alt="Filma" title="Filma" src="Documentation/screenshots/detailvc.png" width="200">
+| Album TableViewController  | Photos CollectionViewController | PhotoDetail ViewController | 
+| :---: | :---: | :---: |
+| <img alt="Filma" title="Filma" src="Documentation/screenshots/tablevc.png" width="200"> | <img alt="Filma" title="Filma" src="Documentation/screenshots/collectionvc.png" width="200">  | <img alt="Filma" title="Filma" src="Documentation/screenshots/detailvc.png" width="200">  |
+
+
+
+
 
 ## Tech/framework used
 Built with:
