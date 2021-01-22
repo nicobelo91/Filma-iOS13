@@ -34,10 +34,8 @@ class FilmaManager {
                     let title = value.dictionaryValue["title"]!.string
                     
                     let album = Album(id: id, userId: userId, title: title)
-//                    self.albums.append(album)
                     self.delegate?.didAppendAlbum(self, album)
                 }
-                //self.tableView.reloadData()
                 self.delegate?.didUpdateData(self)
                 
             case .failure(let error):
@@ -61,12 +59,8 @@ class FilmaManager {
                     let thumbnailUrl = value.dictionaryValue["thumbnailUrl"]!.string
                     
                     let photo = Photo(albumId: albbumId, id: id, title: title, url: url, thumbnailUrl: thumbnailUrl)
-//                    if photo.albumId == self.selectedAlbum?.id {
-//                        self.photos.append(photo)
-//                    }
                     self.delegate?.didAppendPhoto(self, photo)
                 }
-                //self.collectionView.reloadData()
                 self.delegate?.didUpdateData(self)
                 
             case .failure(let error):

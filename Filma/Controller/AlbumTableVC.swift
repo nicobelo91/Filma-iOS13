@@ -15,17 +15,19 @@ class AlbumTableVC: UITableViewController {
     var albums = [Album]()
     var searchedAlbums = [Album]()
     var filmaManager = FilmaManager()
+    var searchBarManager = SearchBarManager()
     var searching = false
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSearchController()
+        searchBarManager.configureAlbumSearchController(searchController, navigationItem)
         filmaManager.delegate = self
+        searchController.searchBar.delegate = self
         filmaManager.fetchAlbums()
     }
     
-    // MARK: - Tableview Data Source
+    // MARK: - Tableview DataSource
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
@@ -88,16 +90,6 @@ extension AlbumTableVC: UISearchBarDelegate {
         searching = false
         searchBar.text = ""
         tableView.reloadData()
-    }
-    
-    func configureSearchController() {
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Albums"
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
-        searchController.searchBar.delegate = self
-        
     }
 }
 

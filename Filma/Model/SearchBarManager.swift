@@ -5,9 +5,9 @@
 //  Created by Nico Cobelo on 22/01/2021.
 //
 
-import Foundation
+import UIKit
 
-struct SearchBarManager {
+class SearchBarManager: UIViewController {
     
     func changeNumOfColumns(_ selectedScope: Int) -> ColumnFlowLayout {
         
@@ -21,5 +21,25 @@ struct SearchBarManager {
             columnLayout = ColumnFlowLayout(cellsPerRow: 3, minimumInteritemSpacing: 0, minimumLineSpacing: 0)
         }
         return columnLayout
+    }
+    
+
+    func configureAlbumSearchController(_ searchController: UISearchController, _ navigationItem: UINavigationItem) {
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Albums"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+    }
+    
+    func configurePhotoSearchController(_ searchController: UISearchController, _ navigationItem: UINavigationItem) {
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Photos"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+        searchController.searchBar.scopeButtonTitles = ["1 Column", "2 Columns", "3 Columns"]
+        searchController.searchBar.selectedScopeButtonIndex = 2
+
     }
 }

@@ -27,11 +27,12 @@ class PhotoCollectionVC: UICollectionViewController {
         super.viewDidLoad()
         filmaManager.fetchPhotos()
         filmaManager.delegate = self
-        configureSearchController()
+        searchBarManager.configurePhotoSearchController(searchController, navigationItem)
+        searchController.searchBar.delegate = self
         collectionView.collectionViewLayout = searchBarManager.changeNumOfColumns(3)
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - CollectionView DataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
@@ -92,20 +93,7 @@ extension PhotoCollectionVC: UISearchBarDelegate {
         let columnLayout = searchBarManager.changeNumOfColumns(selectedScope)
         collectionView.collectionViewLayout = columnLayout
     }
-    
-    
-    func configureSearchController() {
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Photos"
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
-        searchController.searchBar.scopeButtonTitles = ["1 Column", "2 Columns", "3 Columns"]
-        searchController.searchBar.selectedScopeButtonIndex = 2
-        searchController.searchBar.delegate = self
-        
-    }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searching = false
         searchBar.text = ""
